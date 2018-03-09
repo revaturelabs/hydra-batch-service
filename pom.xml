@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>BatchRepositoryService</name>
-	<description>Microservice hosting the Caliber Batch database table</description>
+	<description>Microservice hosting the Caliber and Assignforce Batch database table</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -30,23 +30,27 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
-				  <dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-config</artifactId>
-  </dependency>
-  <dependency>
-    <groupId>org.springframework.cloud</groupId>
-    <artifactId>spring-cloud-starter-eureka</artifactId>
-  </dependency>
 		
+		<dependency>
+    		<groupId>org.springframework.cloud</groupId>
+  	  		<artifactId>spring-cloud-starter-config</artifactId>
+  		</dependency>
+  		
+  		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-eureka</artifactId>
+  		</dependency>
+  		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		
 		<dependency>
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
@@ -75,10 +79,12 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		</dependency>
+		
  		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
@@ -115,7 +121,13 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 		</dependency>
+		<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-devtools</artifactId>
+				<optional>true</optional>
+		</dependency>
 	</dependencies>
+	
 <dependencyManagement>
   <dependencies>
     <dependency>
