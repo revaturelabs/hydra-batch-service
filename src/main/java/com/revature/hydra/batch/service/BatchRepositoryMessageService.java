@@ -1,4 +1,4 @@
-package com.revature.hydra.service;
+package com.revature.hydra.batch.service;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.revature.hydra.model.Batch;
-import com.revature.hydra.model.SimpleBatch;
+import com.revature.beans.Batch;
+import com.revature.beans.SimpleBatch;
 
 @Service
 public class BatchRepositoryMessageService {
@@ -26,10 +26,13 @@ public class BatchRepositoryMessageService {
 	 * @param message
 	 * @return
 	 */
-	@RabbitListener(queues = "revature.caliber.repos.batch")
+	@RabbitListener(queues = "revature.hydra.repos.batch")
 	public SimpleBatch receive(String message) {
 		System.out.println("message recieved 1");
-		return brd.processSimpleBatchRequest(getRequest(message));
+		System.out.println(message);
+		SimpleBatch sb = brd.processSimpleBatchRequest(getRequest(message));
+		System.out.println(sb);
+		return sb;
 	}
 	/**
 	 * Listens to the batch list queue for methods calls that retrieves a List of SimpleBatch
@@ -38,7 +41,7 @@ public class BatchRepositoryMessageService {
 	 * @param message
 	 * @return
 	 */
-	@RabbitListener(queues = "revature.caliber.repos.batch.list")
+	@RabbitListener(queues = "revature.hydra.repos.batch.list")
 	public List<SimpleBatch> receiveList(String message) {
 		System.out.println("message recieved");
 		return brd.processListSimpleBatchRequest(getRequest(message));
@@ -46,12 +49,12 @@ public class BatchRepositoryMessageService {
 	/**
 	 * 
 	 * Listens to the service.batch.list queue for methods calls that retrieves a list of Batches
-	 * and disptach proper method.
+	 * and dispatch proper method.
 	 * 
 	 * @param message
 	 * @return
 	 */
-	@RabbitListener(queues = "revature.caliber.service.batch.list")
+	@RabbitListener(queues = "revature.hydra.service.batch.list")
 	public List<Batch> receiveBatchList(String message) {
 		System.out.println("message recieved 3");
 		return bcd.processListBatchRequest(getRequest(message));
@@ -64,7 +67,7 @@ public class BatchRepositoryMessageService {
 	 * @param message
 	 * @return
 	 */
-	@RabbitListener(queues = "revature.caliber.service.batch")
+	@RabbitListener(queues = "revature.hydra.service.batch")
 	public Batch receiveBatch(String message) {
 		System.out.println("message recieved 4");
 		return bcd.processBatchRequest(getRequest(message));

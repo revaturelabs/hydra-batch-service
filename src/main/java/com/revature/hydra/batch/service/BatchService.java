@@ -1,4 +1,4 @@
-package com.revature.hydra.service;
+package com.revature.hydra.batch.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.hydra.model.Address;
-import com.revature.hydra.model.Batch;
+import com.revature.beans.Address;
+import com.revature.beans.Batch;
 
 /**
  * Provides logic concerning trainer and trainee data. Application logic has no

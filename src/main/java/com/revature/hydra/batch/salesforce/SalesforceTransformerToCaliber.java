@@ -1,16 +1,16 @@
-package com.revature.hydra.salesforce;
+package com.revature.hydra.batch.salesforce;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import com.revature.hydra.model.Batch;
-import com.revature.hydra.model.SkillType;
-import com.revature.hydra.model.Trainee;
-import com.revature.hydra.model.Trainer;
-import com.revature.hydra.model.TrainingStatus;
-import com.revature.hydra.salesforce.beans.BatchTrainer;
-import com.revature.hydra.salesforce.beans.SalesforceBatch;
-import com.revature.hydra.salesforce.beans.SalesforceTrainee;
+import com.revature.beans.Batch;
+import com.revature.beans.SkillType;
+import com.revature.beans.Trainee;
+import com.revature.beans.Trainer;
+import com.revature.beans.TrainingStatus;
+import com.revature.hydra.batch.salesforce.beans.BatchTrainer;
+import com.revature.hydra.batch.salesforce.beans.SalesforceBatch;
+import com.revature.hydra.batch.salesforce.beans.SalesforceTrainee;
 
 @Component
 public class SalesforceTransformerToCaliber {

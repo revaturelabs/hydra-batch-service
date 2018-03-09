@@ -14,8 +14,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.revature.hydra.model.SimpleBatch;
-import com.revature.hydra.repository.BatchRepository;
+import com.revature.beans.SimpleBatch;
+import com.revature.hydra.batch.repository.BatchRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

@@ -1,17 +1,13 @@
-package com.revature.hydra;
+package com.revature.hydra.batch;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.revature.hydra.model.SimpleBatch;
-import com.revature.hydra.service.BatchCompositionMessageService;
-import com.revature.hydra.service.BatchCompositionService;
+import com.revature.hydra.batch.service.BatchCompositionService;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -21,7 +17,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@EnableEurekaClient 
+@EnableDiscoveryClient
+@EntityScan("com.revature.beans")
 public class BatchRepositoryServiceApplication {
 //	@Autowired
 //	BatchCompositionMessageService bcms;
@@ -30,17 +27,17 @@ public class BatchRepositoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BatchRepositoryServiceApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner runner() {
-		return args -> {
-			System.out.println(bcs.findAllCurrent());
-		};
-	}
+//	@Bean
+//	public CommandLineRunner runner() {
+//		return args -> {
+//			System.out.println(bcs.findAllCurrent());
+//		};
+//	}
 	@Bean
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
           .select()                                  
-          .apis(RequestHandlerSelectors.basePackage("com.revature.caliber.controller"))              
+          .apis(RequestHandlerSelectors.basePackage("com.revature.hydra.controller"))              
           .paths(PathSelectors.any())                          
           .build();
     }

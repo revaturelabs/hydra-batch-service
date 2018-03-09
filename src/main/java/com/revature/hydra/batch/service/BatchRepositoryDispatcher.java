@@ -1,4 +1,4 @@
-package com.revature.hydra.service;
+package com.revature.hydra.batch.service;
 
 import java.util.List;
 
@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.revature.hydra.model.SimpleBatch;
-import com.revature.hydra.repository.BatchRepository;
+import com.revature.beans.SimpleBatch;
+import com.revature.hydra.batch.repository.BatchRepository;
+
 @Service
 public class BatchRepositoryDispatcher {
 	@Autowired
@@ -23,9 +24,16 @@ public class BatchRepositoryDispatcher {
 	public SimpleBatch processSimpleBatchRequest(JsonObject request) {
 		Gson gson=new GsonBuilder().setDateFormat("mm-dd-yyy").create();
 		String methodName = request.get("methodName").getAsString();
+		System.out.println(methodName);
 		switch(methodName) {
 			case "findOne":
+				System.out.println("Entered findOne Switch statement");
+				SimpleBatch sb = repo.findOne(request.get("batchId").getAsInt());
+				System.out.println("findOne: " + request.get("batchId").getAsInt());
+				System.out.println("findOne: " + sb);
 				return repo.findOne(request.get("batchId").getAsInt());
+//				BatchRepositoryTest brt = new BatchRepositoryTest();
+//				return brt.findOne(request.get("batchId").getAsInt());
 			case "findOneWithDroppedTrainees":
 				return repo.findOne(request.get("batchId").getAsInt());
 			case "findOneWithTraineesAndGrades" :

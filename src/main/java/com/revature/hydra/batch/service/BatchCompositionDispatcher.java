@@ -1,4 +1,4 @@
-package com.revature.hydra.service;
+package com.revature.hydra.batch.service;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
-import com.revature.hydra.model.Batch;
+import com.revature.beans.Batch;
 
 @Service
 public class BatchCompositionDispatcher {

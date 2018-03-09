@@ -1,8 +1,8 @@
-package com.revature.hydra.repository;
+package com.revature.hydra.batch.repository;
 
 import java.util.List;
 
-import com.revature.hydra.model.SimpleBatch;
+import com.revature.beans.SimpleBatch;
 
 public interface BatchRepositoryCustom {
 	/**

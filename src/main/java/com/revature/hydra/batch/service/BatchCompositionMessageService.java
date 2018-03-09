@@ -1,4 +1,4 @@
-package com.revature.hydra.service;
+package com.revature.hydra.batch.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.revature.hydra.model.Address;
-import com.revature.hydra.model.Batch;
-import com.revature.hydra.model.SimpleBatch;
-import com.revature.hydra.model.SimpleNote;
-import com.revature.hydra.model.SimpleTrainee;
-import com.revature.hydra.model.SimpleTrainer;
-import com.revature.hydra.model.Trainer;
+import com.revature.beans.Address;
+import com.revature.beans.Batch;
+import com.revature.beans.SimpleBatch;
+import com.revature.beans.SimpleNote;
+import com.revature.beans.SimpleTrainee;
+import com.revature.beans.SimpleTrainer;
+import com.revature.beans.Trainer;
 
 @Service
 public class BatchCompositionMessageService {
@@ -29,7 +29,7 @@ public class BatchCompositionMessageService {
 	private static final String TRAINER_ROUTING_KEY = "9xdaX72tPYuz8xDP";
 	private static final String ADDRESS_ROUTING_KEY = "oEKQeav8rcejeYgq";
 	private static final String ADDRESS_LIST_ROUTING_KEY = "Jf2zpP6hPvPHEXsV";
-	private static final String RABBIT_REPO_EXCHANGE = "revature.caliber.repos";
+	private static final String RABBIT_REPO_EXCHANGE = "revature.hydra.repos";
 	/**
 	 * 
 	 * @param trainerId
@@ -39,6 +39,8 @@ public class BatchCompositionMessageService {
 		JsonObject SimpleTrainerRequest = new JsonObject();
 		SimpleTrainerRequest.addProperty("methodName", "findOne");
 		SimpleTrainerRequest.addProperty("trainerId", trainerId);
+		rabbitTemplate.convertAndSend(RABBIT_REPO_EXCHANGE, TRAINER_ROUTING_KEY, SimpleTrainerRequest.toString());
+		System.out.println("SENT!!!!!!!!!");
 		return (SimpleTrainer) rabbitTemplate.convertSendAndReceive(
 				RABBIT_REPO_EXCHANGE, TRAINER_ROUTING_KEY, SimpleTrainerRequest.toString());
 		

@@ -1,4 +1,4 @@
-package com.revature.hydra.exceptions;
+package com.revature.hydra.batch.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

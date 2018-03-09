@@ -1,4 +1,4 @@
-package com.revature.hydra.salesforce.beans;
+package com.revature.hydra.batch.salesforce.beans;
 
 import java.util.Arrays;
 

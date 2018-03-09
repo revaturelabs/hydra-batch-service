@@ -1,4 +1,4 @@
-package com.revature.hydra.model;
+package com.revature.beans;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "CALIBER_BATCH")
+@Table(name = "BATCH")
 @Cacheable
 public class ConsolidatedBatch implements Serializable {
 	private static final long serialVersionUID = -7000300062384597615L;

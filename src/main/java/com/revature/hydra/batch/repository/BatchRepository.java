@@ -1,4 +1,4 @@
-package com.revature.hydra.repository;
+package com.revature.hydra.batch.repository;
 
 import java.util.Date;
 import java.util.List;
@@ -6,9 +6,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.stereotype.Repository;
 
-import com.revature.hydra.model.SimpleBatch;
+import com.revature.beans.SimpleBatch;
 @RepositoryRestResource(collectionResourceRel = "batch", path = "batch")
 public interface BatchRepository extends JpaRepository<SimpleBatch, Integer>, BatchRepositoryCustom {
 	/**
@@ -29,4 +28,5 @@ public interface BatchRepository extends JpaRepository<SimpleBatch, Integer>, Ba
 	 * @return
 	 */
 	List <SimpleBatch> findOneByResourceId(@Param("resourceId") String resourceId);
+	
 }

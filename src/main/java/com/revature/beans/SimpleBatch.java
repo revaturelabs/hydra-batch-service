@@ -1,4 +1,4 @@
-package com.revature.hydra.model;
+package com.revature.beans;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,7 +24,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * The type Simple Batch.
  */
 @Entity
-@Table(name = "CALIBER_BATCH")
+@Table(name = "BATCH")
 @Cacheable
 public class SimpleBatch implements Serializable {
 	private static final long serialVersionUID = -7000300062384597615L;

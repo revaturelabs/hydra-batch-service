@@ -1,4 +1,4 @@
-package com.revature.hydra.security.impl;
+package com.revature.hydra.batch.security.impl;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.revature.hydra.security.models;
+package com.revature.hydra.batch.security.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

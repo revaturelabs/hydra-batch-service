@@ -1,4 +1,4 @@
-package com.revature.hydra.service;
+package com.revature.hydra.batch.service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.revature.hydra.model.Address;
-import com.revature.hydra.model.Batch;
-import com.revature.hydra.model.Note;
-import com.revature.hydra.model.SimpleBatch;
-import com.revature.hydra.model.SimpleNote;
-import com.revature.hydra.model.SimpleTrainee;
-import com.revature.hydra.model.Trainee;
-import com.revature.hydra.model.Trainer;
-import com.revature.hydra.model.TrainingStatus;
-import com.revature.hydra.repository.BatchRepository;
+import com.revature.beans.Address;
+import com.revature.beans.Batch;
+import com.revature.beans.Note;
+import com.revature.beans.SimpleBatch;
+import com.revature.beans.SimpleNote;
+import com.revature.beans.SimpleTrainee;
+import com.revature.beans.Trainee;
+import com.revature.beans.Trainer;
+import com.revature.beans.TrainingStatus;
+import com.revature.hydra.batch.repository.BatchRepository;
 @Service
 public class BatchCompositionService {
 	@Autowired
@@ -81,7 +81,12 @@ public class BatchCompositionService {
 	 * @return
 	 */
 	public List<Batch> findAll() {
+		List<SimpleBatch> batchList = repo.findAll();
+		System.out.println("Repo call for findAll returned");
+		System.out.println(batchList);
+		composeBatch(batchList.remove(0), true);
 		return composeListOfBatch(repo.findAll(), false, true, true);
+		
 	}
 	/**
 	 * 
@@ -226,11 +231,31 @@ public class BatchCompositionService {
 	 * @return
 	 */
 	private Batch composeBatch(SimpleBatch src, boolean includeDropped) {
+		System.out.println("composeBatch");
 		Batch b = setAddressAndTrainer(src);
+		System.out.println("Batch created: ");
+		System.out.println(b);
 		b.setTrainees(getBatchTrainees(src.getBatchId(), includeDropped));
-		if(b.getTrainees() == null) b.setTrainees(new HashSet<>());
+		System.out.println("batch trainees are set");
+		System.out.println(b);
+		if(b.getTrainees() == null) {
+			b.setTrainees(new HashSet<>());
+			System.out.println("Trainees was null and is now set to an empty hashset");
+			System.out.println(b);
+		}
+		
 		b.setNotes(getBatchNotes(src.getBatchId()));
-		if(b.getNotes() == null) b.setNotes(new HashSet<>());
+		System.out.println("Notes for batch has been set");
+		System.out.println(b);
+		
+		if(b.getNotes() == null) {
+			b.setNotes(new HashSet<>());
+			System.out.println("No notes to add to batch object so instantiating it to an empty hashset");
+			System.out.println(b);
+		}
+		
+		System.out.println("ComposeBatch  method finished executing and returning the batch object");
+		System.out.println(b);
 		return b;	
 	}
 //	/**

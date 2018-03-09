@@ -1,4 +1,4 @@
-package com.revature.hydra.model;
+package com.revature.beans;
 
 import java.io.Serializable;
 import java.util.Set;

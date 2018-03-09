@@ -1,4 +1,4 @@
-package com.revature.hydra.repository;
+package com.revature.hydra.batch.repository;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
-import com.revature.hydra.model.SimpleBatch;
+import com.revature.beans.SimpleBatch;
 @Repository
 public class BatchRepositoryImpl implements BatchRepositoryCustom {
 	@PersistenceContext

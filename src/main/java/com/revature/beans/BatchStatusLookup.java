@@ -1,4 +1,4 @@
-package com.revature.hydra.model;
+package com.revature.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

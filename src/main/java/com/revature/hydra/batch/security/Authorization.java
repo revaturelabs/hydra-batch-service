@@ -1,4 +1,4 @@
-package com.revature.hydra.security;
+package com.revature.hydra.batch.security;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

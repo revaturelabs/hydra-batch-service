@@ -1,4 +1,4 @@
-package com.revature.hydra.controller;
+package com.revature.hydra.batch.controller;
 
 import java.util.List;
 
@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.hydra.model.Address;
-import com.revature.hydra.model.Batch;
-import com.revature.hydra.model.Trainer;
-import com.revature.hydra.security.models.SalesforceUser;
-import com.revature.hydra.service.BatchService;
+import com.revature.beans.Address;
+import com.revature.beans.Batch;
+import com.revature.beans.Trainer;
+import com.revature.hydra.batch.security.models.SalesforceUser;
+import com.revature.hydra.batch.service.BatchService;
 
 /**
  * Services requests for Trainer, Trainee, and Batch information
@@ -145,7 +145,6 @@ public class BatchController {
 	public ResponseEntity<List<Batch>> getAllBatches() {
 		log.info("Fetching all batches");
 		List<Batch> batches = batchService.findAllBatches();
-		System.out.println(batches);
 		return new ResponseEntity<>(batches, HttpStatus.OK);
 
 	}
