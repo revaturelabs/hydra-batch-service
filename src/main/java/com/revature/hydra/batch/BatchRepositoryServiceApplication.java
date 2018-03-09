@@ -1,6 +1,7 @@
 package com.revature.hydra.batch;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -27,6 +28,8 @@ public class BatchRepositoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BatchRepositoryServiceApplication.class, args);
 	}
+	
+// Commented out because it was failing and appears to have no practical use as of 3/9/2018
 //	@Bean
 //	public CommandLineRunner runner() {
 //		return args -> {

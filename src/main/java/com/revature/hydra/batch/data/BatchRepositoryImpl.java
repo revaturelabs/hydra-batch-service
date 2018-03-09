@@ -1,4 +1,4 @@
-package com.revature.hydra.batch.repository;
+package com.revature.hydra.batch.data;
 
 import java.time.ZonedDateTime;
 import java.util.Date;

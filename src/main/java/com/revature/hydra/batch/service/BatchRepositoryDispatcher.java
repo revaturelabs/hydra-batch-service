@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.revature.beans.SimpleBatch;
-import com.revature.hydra.batch.repository.BatchRepository;
+import com.revature.hydra.batch.data.BatchRepository;
 
 @Service
 public class BatchRepositoryDispatcher {

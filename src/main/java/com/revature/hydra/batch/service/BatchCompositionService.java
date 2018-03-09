@@ -20,7 +20,7 @@ import com.revature.beans.SimpleTrainee;
 import com.revature.beans.Trainee;
 import com.revature.beans.Trainer;
 import com.revature.beans.TrainingStatus;
-import com.revature.hydra.batch.repository.BatchRepository;
+import com.revature.hydra.batch.data.BatchRepository;
 @Service
 public class BatchCompositionService {
 	@Autowired
