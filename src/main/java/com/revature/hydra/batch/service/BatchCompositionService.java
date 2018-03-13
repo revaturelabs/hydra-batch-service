@@ -81,10 +81,6 @@ public class BatchCompositionService {
 	 * @return
 	 */
 	public List<Batch> findAll() {
-		List<SimpleBatch> batchList = repo.findAll();
-		System.out.println("Repo call for findAll returned");
-		System.out.println(batchList);
-		composeBatch(batchList.remove(0), true);
 		return composeListOfBatch(repo.findAll(), false, true, true);
 		
 	}
@@ -174,6 +170,7 @@ public class BatchCompositionService {
 	 */
 	public Batch setAddressAndTrainer(SimpleBatch src){
 		Address a = null;
+		
 		Trainer t = new Trainer(BCMS.sendSimpleTrainerRequest(src.getTrainerId()));
 		Trainer c = null;
 		if(src.getAddressId()!=null){
@@ -231,31 +228,17 @@ public class BatchCompositionService {
 	 * @return
 	 */
 	private Batch composeBatch(SimpleBatch src, boolean includeDropped) {
-		System.out.println("composeBatch");
 		Batch b = setAddressAndTrainer(src);
-		System.out.println("Batch created: ");
-		System.out.println(b);
 		b.setTrainees(getBatchTrainees(src.getBatchId(), includeDropped));
-		System.out.println("batch trainees are set");
-		System.out.println(b);
 		if(b.getTrainees() == null) {
 			b.setTrainees(new HashSet<>());
-			System.out.println("Trainees was null and is now set to an empty hashset");
-			System.out.println(b);
 		}
 		
 		b.setNotes(getBatchNotes(src.getBatchId()));
-		System.out.println("Notes for batch has been set");
-		System.out.println(b);
-		
 		if(b.getNotes() == null) {
 			b.setNotes(new HashSet<>());
-			System.out.println("No notes to add to batch object so instantiating it to an empty hashset");
-			System.out.println(b);
 		}
 		
-		System.out.println("ComposeBatch  method finished executing and returning the batch object");
-		System.out.println(b);
 		return b;	
 	}
 //	/**

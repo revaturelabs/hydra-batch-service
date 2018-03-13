@@ -24,9 +24,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.beans.Address;
 import com.revature.beans.Batch;
+import com.revature.beans.BatchLocation;
 import com.revature.beans.Trainer;
+import com.revature.hydra.batch.exceptions.ResponseErrorDTO;
 import com.revature.hydra.batch.security.models.SalesforceUser;
+import com.revature.hydra.batch.service.BatchCompositionService;
 import com.revature.hydra.batch.service.BatchService;
+
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * Services requests for Trainer, Trainee, and Batch information
@@ -183,8 +190,166 @@ public class BatchController {
 		return ((SalesforceUser) auth.getPrincipal()).getCaliberUser();
 	}
 	
-//	private Trainer getPrincipal() {
-//		return null;
-//		
-//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * ASSIGNFORCE CONTROLLER
+	 */
+	
+	
+	// CREATE
+	// creating new batch object from information passed from batch data
+//	@PreAuthorize("hasPermission('', 'manager')")
+	@ApiOperation(value = "Create a branch", response = BatchCompositionService.class)
+	@ApiResponses({
+			@ApiResponse(code=200, message ="Successfully Created a Batch"),
+			@ApiResponse(code=400, message ="Bad Request, BatchDTO"),
+			@ApiResponse(code=500, message ="Cannot retrieve batch")
+	})
+	@RequestMapping(value="/api/v2/batch", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Transactional
+	public Object createBatchAssignForce(@RequestBody Batch batch) {
+		batchService.save(batch);
+		if (batch == null) {
+			return new ResponseEntity<ResponseErrorDTO>(new ResponseErrorDTO("Batch failed to save."),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		} else {
+			return new ResponseEntity<Batch>(batch, HttpStatus.OK);
+		}
+	}
+
+//	@PreAuthorize("hasPermission('', 'manager')")
+	@ApiOperation(value = "Retrieve a batch", response = BatchCompositionService.class)
+	@ApiResponses({
+			@ApiResponse(code=200, message ="Successfully retrieved a Batch"),
+			@ApiResponse(code=400, message ="Bad Request, BatchDTO"),
+			@ApiResponse(code=500, message ="Cannot create batch")
+	})
+	// RETRIEVE
+	// retrieve batch with given ID
+	@RequestMapping(value = "/api/v2/batch/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Object retrieveBatch(@PathVariable("id") Integer batchId) {
+		Batch batch = batchService.findBatch(batchId);
+		if (batch == null) {
+			return new ResponseEntity<ResponseErrorDTO>(new ResponseErrorDTO("No batch found of ID " + batchId + "."),
+					HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<Batch>(batch, HttpStatus.OK);
+		}
+	}
+
+	// DELETE
+	// delete batch with given ID
+//	@PreAuthorize("hasPermission('', 'manager')")
+	@ApiOperation(value = "Delete a batch", response = BatchCompositionService.class)
+	@ApiResponses({
+			@ApiResponse(code=200, message ="Successfully Deleted a Batch"),
+			@ApiResponse(code=400, message ="Bad Request, ID"),
+			@ApiResponse(code=500, message ="Cannot delete batch")
+	})
+	@RequestMapping(value = "/api/v2/batch/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Transactional
+	public Object deleteBatch(@PathVariable("id") Integer batchId) {
+		Batch batch = batchService.findBatch(batchId);
+		
+		log.info("deleting batch: " + batch);
+		batchService.delete(batch);
+		return new ResponseEntity<Object>(null, HttpStatus.OK);
+	}
+
+	
+	// GET ALL
+	// retrieve all batches
+//	@PreAuthorize("hasPermission('', 'Trainers')")
+
+
+//	@PreAuthorize("hasPermission('', 'basic')")
+
+	@ApiOperation(value = "Retrieve all batches", response = BatchCompositionService.class)
+	@ApiResponses({
+			@ApiResponse(code=200, message ="Successfully retrieved all batches"),
+			@ApiResponse(code=400, message ="Bad Request"),
+			@ApiResponse(code=500, message ="Cannot retrieve all batches")
+	})
+
+	@RequestMapping(value = "/api/v2/batch", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Object retrieveAllBatches() {
+		List<Batch> batch_list = batchService.findAllBatches();
+
+		if (batch_list == null) {
+			return new ResponseEntity<ResponseErrorDTO>(new ResponseErrorDTO("Fetching all batches failed."),
+					HttpStatus.NOT_FOUND);
+		} else if (batch_list.isEmpty()) {
+			return new ResponseEntity<ResponseErrorDTO>(new ResponseErrorDTO("No batches available."),
+					HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<List<Batch>>(batch_list, HttpStatus.OK);
+		}
+	}
+
+	// UPDATE
+//	@PreAuthorize("hasPermission('', 'manager')")
+	@ApiOperation(value = "Update a batch", response = BatchCompositionService.class)
+	@ApiResponses({
+			@ApiResponse(code=200, message ="Successfully updated a batch"),
+			@ApiResponse(code=400, message ="Bad Request, BATCHDTO"),
+			@ApiResponse(code=500, message ="Cannot update batch")
+	})
+	@RequestMapping(value = "/api/v2/batch", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Transactional
+	public Object updateBatchAssignForce(@RequestBody Batch batch) {
+		Batch b = batchService.findBatch(batch.getBatchId());
+
+		if (b == null) {
+			return new ResponseEntity<ResponseErrorDTO>(
+					new ResponseErrorDTO("No batch with id '" + batch.getBatchId() + "' could be found to update"),
+					HttpStatus.NOT_FOUND);
+		}
+
+		b.setName(batch.getName());
+		b.setSkills(batch.getSkills());
+		b.setStartDate(batch.getStartDate());
+		b.setEndDate(batch.getEndDate());
+		b.setTrainer(batch.getTrainer());
+		b.setCoTrainer(batch.getCoTrainer());
+		
+		if (batch.getCurriculum() == null) {
+			return new ResponseEntity<ResponseErrorDTO>(new ResponseErrorDTO("Curriculum cannot be null"),
+					HttpStatus.BAD_REQUEST);
+		}
+		
+		b.setCurriculum(batch.getCurriculum());
+		b.setFocus(batch.getFocus());
+
+		BatchLocation bl = batch.getBatchLocation();
+		b.setBatchLocation(bl);
+
+		log.info("changing to: " + batch);
+		
+		try {
+			batchService.save(b);
+		} catch (Exception ex) {
+			log.warn(ex);
+			return new ResponseEntity<ResponseErrorDTO>(new ResponseErrorDTO(ex.getMessage()),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		return new ResponseEntity<Batch>(b, HttpStatus.OK);
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/api/v2/batch/hydramotto", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getHydraMotto() {
+		log.info("Fetching common training locations");
+		return new ResponseEntity<>("Hail Hydra!", HttpStatus.OK);
+	}
+	
 }

@@ -4,19 +4,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.revature.beans.Address;
-import com.revature.beans.Batch;
-import com.revature.beans.SimpleBatch;
 import com.revature.beans.SimpleNote;
 import com.revature.beans.SimpleTrainee;
 import com.revature.beans.SimpleTrainer;
-import com.revature.beans.Trainer;
 
 @Service
 public class BatchCompositionMessageService {
@@ -39,8 +34,6 @@ public class BatchCompositionMessageService {
 		JsonObject SimpleTrainerRequest = new JsonObject();
 		SimpleTrainerRequest.addProperty("methodName", "findOne");
 		SimpleTrainerRequest.addProperty("trainerId", trainerId);
-		rabbitTemplate.convertAndSend(RABBIT_REPO_EXCHANGE, TRAINER_ROUTING_KEY, SimpleTrainerRequest.toString());
-		System.out.println("SENT!!!!!!!!!");
 		return (SimpleTrainer) rabbitTemplate.convertSendAndReceive(
 				RABBIT_REPO_EXCHANGE, TRAINER_ROUTING_KEY, SimpleTrainerRequest.toString());
 		

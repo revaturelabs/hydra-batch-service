@@ -18,8 +18,6 @@ public class BatchCompositionDispatcher {
 	 * @return
 	 */
 	public List<Batch> processListBatchRequest(JsonObject request) {
-		System.out.println(request);
-		System.out.println("List");
 		String methodName = request.get("methodName").getAsString();
 		if(methodName.contains("findAll")){
 			if(methodName.contains("AfterDate")) {
@@ -48,8 +46,6 @@ public class BatchCompositionDispatcher {
 	 */
 	public Batch processBatchRequest(JsonObject request) {
 		String methodName = request.get("methodName").getAsString();
-		System.out.println(request);
-		System.out.println("single");
 		if(methodName.contains("findOne")){
 			if(methodName.contains("WithTraineeAndGrades")){
 				return bcs.findOneWithTraineesAndGrades(request.get("batchId").getAsInt());

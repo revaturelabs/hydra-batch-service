@@ -6,7 +6,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.revature.hydra.batch.service.BatchRepositoryDispatcher;
 
 @Configuration
 public class BatchRepositoryServiceConfiguration {
