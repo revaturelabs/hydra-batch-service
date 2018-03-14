@@ -12,6 +12,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -63,7 +64,7 @@ public class SimpleBatch implements Serializable {
 	@Column(name = "SKILL_TYPE")
 	private SkillType skillType;
 	
-	@ElementCollection                                                          
+	@ElementCollection(fetch=FetchType.EAGER)                                                         
 	@CollectionTable(name = "BATCH_SKILL_JT", joinColumns = @JoinColumn(name = "BATCH_ID"))
 	@Column(name = "SKILL_ID")                                                    
 	private List<Integer> skills;
@@ -479,7 +480,7 @@ public class SimpleBatch implements Serializable {
 	public String toString() {
 		return "SimpleBatch [batchId=" + batchId + ", resourceId=" + resourceId + ", trainingName=" + trainingName
 				+ ", trainerId=" + trainerId + ", coTrainerId=" + coTrainerId + ", skillType=" 
-				+ skillType + ", skills=" + skills
+				+ skillType +", skills=" + skills
 				+ ", trainingType=" + trainingType + ", location=" + location + ", addressId=" + addressId
 				+ ", goodGradeThreshold=" + goodGradeThreshold + ", borderlineGradeThreshold="
 				+ borderlineGradeThreshold + ", weeks=" + weeks + ", gradedWeeks=" + gradedWeeks + ", startDate="
