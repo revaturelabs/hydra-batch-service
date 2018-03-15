@@ -1,4 +1,4 @@
-package com.revature.hydra;
+package com.revature.hydra.batch;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

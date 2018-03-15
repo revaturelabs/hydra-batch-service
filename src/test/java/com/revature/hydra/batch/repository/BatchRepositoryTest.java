@@ -1,4 +1,4 @@
-package com.revature.hydra.repository;
+package com.revature.hydra.batch.repository;
 
 import static org.junit.Assert.*;
 

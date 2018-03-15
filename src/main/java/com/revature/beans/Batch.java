@@ -11,14 +11,18 @@ public class Batch implements Serializable {
 
 	private Integer batchId;
 	private String resourceId;
+	//TODO consolidate traningName and name
 	private String trainingName;
 	private String name;
 	private Trainer trainer;
 	private Trainer coTrainer;
+	//TODO consolidate skillType and skills
 	private SkillType skillType;                                             
 	private List<Integer> skills;
 	private TrainingType trainingType;
+	//TODO consolidate location and batchLocation
 	private String location;
+	private BatchLocation batchLocation;
 	private Address address;
 	private Short goodGradeThreshold;
 	private Short borderlineGradeThreshold;
@@ -30,7 +34,6 @@ public class Batch implements Serializable {
 	private Integer curriculum;
 	private Integer focus; 
 	private BatchStatusLookup batchStatus;
-	private BatchLocation batchLocation;
 	private Set<Note> notes;
 
 	public Batch() {
@@ -69,6 +72,7 @@ public class Batch implements Serializable {
 		this.batchId = simpleBatch.getBatchId();
 		this.resourceId = simpleBatch.getResourceId();
 		this.trainingName = simpleBatch.getTrainingName();
+		this.name = simpleBatch.getTrainingName();
 		this.skillType = simpleBatch.getSkillType();
 		this.startDate = simpleBatch.getStartDate();
 		this.endDate = simpleBatch.getEndDate();

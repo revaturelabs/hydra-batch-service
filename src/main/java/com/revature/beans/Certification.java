@@ -1,14 +1,12 @@
 package com.revature.beans;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -22,8 +20,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "HYDRA_CERTIFICATION")
-public class Certification {
-	
+public class Certification implements Serializable{
+	private static final long serialVersionUID = -6414050602514475604L;
+
 	@Id
 	@Column(name="CERT_ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CERT_ID_SEQUENCE")
