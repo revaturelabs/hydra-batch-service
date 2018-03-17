@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class Address implements Serializable {
 	private static final long serialVersionUID = -7886621867644813683L;
 
-	private Integer addressId;
+	private int addressId;
 	private String street;
 	private String city;
 	private String state;
 	private String zipcode;
 	private String company;
-	private Boolean active;
+	private boolean active;
 
 	public Address() {
 		super();
