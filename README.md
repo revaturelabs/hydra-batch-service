@@ -11,4 +11,4 @@ This service sends message requests to:
 - Trainee
 - Trainer
 
-More detailed information about located on the wiki
+More detailed information located on the wiki page
