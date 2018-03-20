@@ -40,7 +40,7 @@ public class BatchRepositoryServiceApplication {
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
           .select()                                  
-          .apis(RequestHandlerSelectors.basePackage("com.revature.hydra.controller"))              
+          .apis(RequestHandlerSelectors.basePackage("com.revature.hydra.batch.controller"))              
           .paths(PathSelectors.any())                          
           .build();
     }
