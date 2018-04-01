@@ -20,10 +20,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableDiscoveryClient 
 public class BatchRepositoryServiceApplication {
+
 	@Autowired
 	BatchCompositionMessageService bcms;
+
 	@Autowired
 	BatchCompositionService bcs;
+
 	public static void main(String[] args) {
 		SpringApplication.run(BatchRepositoryServiceApplication.class, args);
 	}
