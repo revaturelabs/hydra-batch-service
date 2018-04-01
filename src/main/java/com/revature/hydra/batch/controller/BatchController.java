@@ -7,19 +7,17 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-// import org.springframework.security.core.Authentication;
-//import org.springframework.security.access.prepost.PreAuthorize;
-//import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.hydra.batch.model.Address;
@@ -49,7 +47,6 @@ public class BatchController {
 	/*
 	 *******************************************************
 	 * BATCH SERVICES
-	 *
 	 *******************************************************
 	 */
 
@@ -59,7 +56,7 @@ public class BatchController {
 	 * @param auth
 	 * @return
 	 */
-	@RequestMapping(value = "/trainer/batch/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping("/trainer/batch/all")
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	//@PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'PANEL')")
 	public ResponseEntity<List<Batch>> findAllBatchesByTrainer() {
@@ -76,7 +73,7 @@ public class BatchController {
 	 *            the batch
 	 * @return the response entity
 	 */
-	@RequestMapping(value = "/all/batch/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping("/all/batch/create")
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
 	public ResponseEntity<Batch> createBatch(@Valid @RequestBody Batch batch) {
@@ -91,7 +88,7 @@ public class BatchController {
 	 * @param batch the batch
 	 * @return the response entity
 	 */
-	@RequestMapping(value = "/all/batch/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping("/all/batch/update")
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
 	public ResponseEntity<Void> updateBatch(@Valid @RequestBody Batch batch) {
@@ -106,7 +103,7 @@ public class BatchController {
 	 * @param id the id of the batch to delete
 	 * @return the response entity
 	 */
-	@RequestMapping(value = "/all/batch/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping("/all/batch/delete/{id}")
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
 	public ResponseEntity<Void> deleteBatch(@PathVariable int id) {
@@ -122,8 +119,7 @@ public class BatchController {
 	 *
 	 * @return the all batches
 	 */
-	@RequestMapping(value = {"/vp/batch/all/current" }, method = RequestMethod.GET,
-			produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping("/vp/batch/all/current")
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'STAGING', 'PANEL')")
 	public ResponseEntity<List<Batch>> getAllCurrentBatches() {
@@ -137,8 +133,7 @@ public class BatchController {
 	 *
 	 * @return the all batches
 	 */
-	@RequestMapping(value = { "/qc/batch/all", "/vp/batch/all" },
-			method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = {"/qc/batch/all", "/vp/batch/all"})
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'STAGING', 'PANEL')")
 	public ResponseEntity<List<Batch>> getAllBatches() {
@@ -155,7 +150,7 @@ public class BatchController {
 	 * @param batchId
 	 * @return
 	 */
-	@RequestMapping(value = "/trainer/week/new/{batchId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping("/trainer/week/new/{batchId}")
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	//@PreAuthorize("hasAnyRole('VP', 'QC','TRAINER', 'PANEL')")
 	public ResponseEntity<Void> createWeek(@PathVariable int batchId) {
@@ -164,7 +159,7 @@ public class BatchController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/all/locations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping("/all/locations")
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	//@PreAuthorize("hasAnyRole('VP', 'STAGING', 'QC', 'TRAINER', 'PANEL')")
 	public ResponseEntity<List<Address>> findCommonLocations() {
