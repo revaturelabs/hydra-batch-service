@@ -1,15 +1,22 @@
 spring:
+  profiles:
+    active: batchservice
+
+---
+
+spring:
   application:
     name: batch
   cloud:
     services:
       registrationMethod: direct
+  profiles: batchservice
 
 eureka:
   client:
     register-with-eureka: true
     leaseRenewalIntervalInSeconds: 10
-    healthcheck:       
+    healthcheck:
       enabled: true
   instance:
     lease-renewal-interval-in-seconds: 10
@@ -22,3 +29,14 @@ security:
 server:
   servlet:
     contextPath: /v0
+
+---
+
+spring:
+  profiles: test
+  datasource:
+    url: jdbc:h2:mem:test
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
