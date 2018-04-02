@@ -1,7 +1,6 @@
 package com.revature.hydra.batch;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -30,19 +29,12 @@ public class BatchRepositoryServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BatchRepositoryServiceApplication.class, args);
 	}
-	// @Bean
-	// public CommandLineRunner runner() {
-	// 	return args -> {
-	// 		System.out.println(bcs.findAllCurrent());
-	// 	};
-	// }
+
 	@Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)  
-          .select()                                  
-          .apis(RequestHandlerSelectors.basePackage("com.revature.caliber.controller"))              
-          .paths(PathSelectors.any())                          
-          .build();
-    }
+	public Docket api() {
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				.apis(RequestHandlerSelectors.basePackage("com.revature.hydra.batch.controller"))
+				.paths(PathSelectors.any()).build();
+	}
 	
 }
