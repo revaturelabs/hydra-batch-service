@@ -1,0 +1,5 @@
+---
+applications:
+- name: batch
+  path: ./target/batch-0.0.1.jar
+  no-route: true
