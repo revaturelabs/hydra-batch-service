@@ -1,4 +1,14 @@
 language: java
+
+addons:
+  sonarcloud:
+    organization: hall-github
+    token:
+      secure: H/WmU2cAE0FaYbTBDQwIPuQYEIJtEfQvZ4D+WcNSAQXKPbxCU426sfdDq818+JLioac4IegKztmWljQG6EItpqgnaOCiFIm6x/Pf1bi/mLw+Di8hC+2nfflnn1P6DD/UXvhZxcE6Cu6p00xqA4s8ZJQkbFYQgxWwynuYoUBMRtAQYs/f9+0Fq6zMS/66KzE2Chs3tl/eOlv6sa2PiNdSuVRnNu4X9WGhX2BSIeucMQmGaa4jfjrKfAj3Xa+Yr211yylSDb8Nc89YCtHqJtOelqAtUtS+sugU/hbE2XHhD5Irmw1s72OIBy6Dt9ENruzYqzg1hABvhmSRM1yx7pxMW7QEwcJkR8pFTiFbo474bZvtsexk/byPQ0Pa1C/uXfQtsIkHjR27oKCWm2+XpFdbpcrxPYAETGTMN9WJv2O5QCvKeM1v8UM/zLPMGilN6a4hPfU3TYB8fOVM7fItGySWgaDhraSIG/FrwMZvMg6inCP/963sgWZX7bdXyMRfl8Ez65stl+zHPfgmsvw7Tug6gTLwziPz9Le83cHw2ItGnGRtxFZa398HN1EkATRPQste83v4MaPBfZekruBUmZtGBxnbTDiMnMfnLmR/qH+m88DSFQ/yzHmC3dKDuKyE0XS1aCDQu3gFwmmT9E+X2oR2D267fUJlCYTmOy14g4JeqAk=
+
+script:
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+
 deploy:
   skip_cleanup: true
   provider: cloudfoundry
@@ -11,3 +21,8 @@ deploy:
   on:
     repo: revaturelabs/hydra-batch-service
     branch: develop
+
+cache:
+  directories:
+  - "$HOME/.m2/repository"
+  - "$HOME/.sonar/cache"
