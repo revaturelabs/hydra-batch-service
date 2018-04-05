@@ -11,6 +11,9 @@ spring:
     services:
       registrationMethod: direct
   profiles: batchservice
+  jpa:
+    hibernate:
+      ddl-auto: create
 
 eureka:
   client:
