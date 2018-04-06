@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,9 +59,10 @@ public class BatchController {
 	 */
 	@GetMapping("/trainer/batch/all")
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	//@PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'PANEL')")
+	@PreAuthorize("hasAnyRole('VP', 'TRAINER', 'STAGING', 'PANEL')")
 	public ResponseEntity<List<Batch>> findAllBatchesByTrainer() {
 		Trainer userPrincipal = getPrincipal();
+		System.out.println();
 		log.info("Getting all batches for trainer: " + userPrincipal);
 		List<Batch> batches = batchService.findAllBatches(userPrincipal.getTrainerId());
 		return new ResponseEntity<>(batches, HttpStatus.OK);
@@ -175,7 +177,10 @@ public class BatchController {
 	 * @return
 	 */
 	private Trainer getPrincipal() {
-		return new Trainer(); //(SalesforceUser) auth.getPrincipal()).getCaliberUser();
+		Trainer trainer = new Trainer();
+		trainer.setTrainerId(1);
+		return trainer;
+		//(SalesforceUser) auth.getPrincipal()).getCaliberUser();
 	}
 	
 //	private Trainer getPrincipal() {
