@@ -54,7 +54,6 @@ public class BatchController {
 	/**
 	 * Find all batches for the currently logged in trainer
 	 *
-	 * @param auth
 	 * @return
 	 */
 	@GetMapping("/trainer/batch/all")
