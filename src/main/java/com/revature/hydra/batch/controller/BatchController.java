@@ -89,7 +89,7 @@ public class BatchController {
 	 * @param batch the batch
 	 * @return the response entity
 	 */
-	@PutMapping("/all/batch/update")
+	@PutMapping("/all/batch")
 	//@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	//@PreAuthorize("hasAnyRole('VP', 'QC', 'TRAINER', 'PANEL')")
 	public ResponseEntity<Void> updateBatch(@Valid @RequestBody Batch batch) {
