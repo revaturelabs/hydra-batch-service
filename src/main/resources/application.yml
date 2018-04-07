@@ -13,7 +13,7 @@ spring:
   profiles: batchservice
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 eureka:
   client:
