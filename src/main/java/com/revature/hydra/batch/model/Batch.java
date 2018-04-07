@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,10 +19,20 @@ public class Batch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer batchId;
+    private Integer borderlineGradeThreshold;
+    private Timestamp endDate;
+    private Integer goodGradeThreshold;
+    private String location;
+    private String skillType;
+    private Timestamp startDate;
+    private String trainingName;
+    private String trainingType;
+    private Integer numberOfWeeks;
+    private Integer coTrainerId;
+    private Integer trainerId;
+    private Integer addressId;
+    private Integer gradedWeeks;
 
-    private String name;
-    private String title;
-    private String email;
 
 }
