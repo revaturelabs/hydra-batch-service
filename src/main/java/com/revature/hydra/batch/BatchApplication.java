@@ -1,5 +1,6 @@
 package com.revature.hydra.batch;
 
+import com.revature.hydra.batch.model.Batch;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration;
 import springfox.documentation.spring.web.plugins.Docket;
@@ -25,6 +27,9 @@ public class BatchApplication {
 
     @Bean
     public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2);
+        return new Docket(DocumentationType.SWAGGER_2)
+            .select()
+            .paths(PathSelectors.ant("/batches/**"))
+            .build();
     }
 }
