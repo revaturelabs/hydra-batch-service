@@ -37,12 +37,25 @@ server:
 
 spring:
   profiles: test
+  h2:
+    console:
+      path: /h2
+      enabled: true
   datasource:
-    url: jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:mem:test;DB_CLOSE_ON_EXIT=false;DB_CLOSE_DELAY=-1;
+    username: sa
+    password:
+    platform: h2
+    driver-class-name: org.h2.Driver
   jpa:
+    hibernate:
+      ddl-auto: create-drop
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        temp:
+          use_jdbc_metadata_defaults: false
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
   rabbitmq:
     listener:
       simple:
@@ -50,6 +63,10 @@ spring:
 eureka:
   client:
     enabled: false
+management:
+  health:
+    rabbit:
+      enabled: false
 security:
   basic:
     enabled: false
