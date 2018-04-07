@@ -1,19 +1,19 @@
 spring:
   profiles:
-    active: batchservice
+    active: production
 
 ---
 
 spring:
+  profiles: production
   application:
     name: batch
   cloud:
     services:
       registrationMethod: direct
-  profiles: batchservice
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 
 eureka:
   client:
